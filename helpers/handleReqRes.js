@@ -2,6 +2,8 @@ const url = require('url');
 const { StringDecoder } = require('string_decoder');
 const routes = require('../routes');
 
+const { parseJson } = require('./utilities');
+
 const { notFoundHandler } = require('../handlers/routeHandler/notFoundHandler');
 
 const app = {};
@@ -33,17 +35,16 @@ app.handlerReqRes = (req, res) => {
 
     req.on('end', () => {
         decoder.end();
-
+        requestProperties.body = parseJson(realData);
         choosenHandler(requestProperties, (statusCode, payload) => {
             const code = typeof statusCode === 'number' ? statusCode : 500;
             const payloadMsg = typeof payload === 'object' ? payload : {};
             const payloadString = JSON.stringify(payloadMsg);
+            res.setHeader('Content-Type', 'application/json');
             res.writeHead(code);
-            res.write(realData);
+            // res.write(realData);
             res.end(payloadString);
         });
-        // console.log(realData);
-        res.end('Hello World yo bd');
     });
 };
 

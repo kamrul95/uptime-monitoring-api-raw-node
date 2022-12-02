@@ -8,9 +8,9 @@ const data = require('./lib/data');
 
 const app = {};
 
-data.create('test', 'users', { name: 'John', email: 'jhon@example.com' }, (result) => {
-    console.log(result);
-});
+// data.create('test', 'users', { name: 'John', email: 'jhon@example.com' }, (result) => {
+//     console.log(result);
+// });
 
 // data.read('test', 'users', (err, result) => {
 //     console.log(result);
@@ -22,9 +22,9 @@ data.create('test', 'users', { name: 'John', email: 'jhon@example.com' }, (resul
 // });
 
 // file delete
-data.delete('test', 'users', (result) => {
-    console.log(result);
-});
+// data.delete('test', 'users', (result) => {
+//     console.log(result);
+// });
 
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
